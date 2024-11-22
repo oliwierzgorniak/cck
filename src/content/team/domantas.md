@@ -1,5 +1,5 @@
 ---
-name: Kristin Mertens
+name: domantas
 function: Computational designer. 
 pic: ./img/kristin.jpeg
 bio: computational designer who fuses technology and creativity to inspire innovative design thinking.
