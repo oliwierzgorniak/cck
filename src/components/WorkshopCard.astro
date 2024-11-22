@@ -1,17 +1,14 @@
 ---
+const { workshop, slug } = Astro.props;
 import { Image } from "astro:assets";
 import ArrowLink from "./ArrowLink.astro";
 ---
 
 <article>
   <div>
-    <h3><span>{##TITLE##}</span></h3>
-    <ArrowLink
-      class="link"
-      href={`/workshops/${##SLUG##}`}
-      title="Learn more"
-    />
-    <Image class="image" src={##IMAGE##} alt="" />
+    <h3><span>{workshop.title}</span></h3>
+    <ArrowLink class="link" href={`/workshops/${slug}`} title="Learn more" />
+    <Image class="image" src={workshop.image} alt="" />
   </div>
 </article>
 

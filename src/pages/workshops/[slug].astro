@@ -1,0 +1,50 @@
+---
+import { getCollection } from "astro:content";
+import Markdown from "../../layouts/Markdown.astro";
+import Image from "astro/components/Image.astro";
+
+export async function getStaticPaths() {
+  const workshopsPosts = await getCollection("workshops");
+
+  return await Promise.all(
+    workshopsPosts.map(async (post) => ({
+      params: {
+        slug: post.slug,
+      },
+      props: {
+        title: post.data.title,
+        image: post.data.image,
+        Body: (await post.render()).Content,
+      },
+    }))
+  );
+}
+
+const { title, image, Body } = Astro.props;
+---
+
+<Markdown>
+  <div slot="top">
+    <a href="/#workshops">Workshops</a>
+    <h1><span>{title}</span></h1>
+  </div>
+
+  <Body />
+
+  <div slot="sidebar">
+    <Image
+      width="300"
+      height="300"
+      src={image}
+      alt="workshop image"
+      class="image"
+    />
+  </div>
+</Markdown>
+
+<style>
+  a {
+    display: block;
+    margin-bottom: var(--sp-m);
+  }
+</style>
