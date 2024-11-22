@@ -1,5 +1,9 @@
 ---
 import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import TeamCard from "./TeamCard.astro";
+const team = await getCollection("team");
+console.log(team);
 ---
 
 <svg
@@ -30,7 +34,16 @@ import { Image } from "astro:assets";
     <p>Check these superheroes</p>
   </header>
   <ul>
-    <li>##TEAM MEMBER##</li>
+    {
+      team.map((i) => (
+        <TeamCard
+          image={i.data.pic}
+          slug={i.slug}
+          name={i.data.name}
+          description={i.data.bio}
+        />
+      ))
+    }
   </ul>
 </section>
 
