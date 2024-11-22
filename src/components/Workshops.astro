@@ -1,5 +1,7 @@
 ---
-
+import WorkshopCard from "./WorkshopCard.astro";
+import { getCollection } from "astro:content";
+const workshops = await getCollection("workshops");
 ---
 
 <section class="container" id="workshops">
@@ -12,7 +14,13 @@
     </p>
   </header>
   <ul>
-    <li>##WORKSHOP##</li>
+    {
+      workshops.map((workshop) => (
+        <li>
+          <WorkshopCard workshop={workshop.data} slug={workshop.slug} />
+        </li>
+      ))
+    }
   </ul>
 </section>
 
